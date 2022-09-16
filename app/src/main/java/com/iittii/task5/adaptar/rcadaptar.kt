@@ -1,14 +1,15 @@
 package com.iittii.task5.adaptar
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-
 import com.iittii.task5.databinding.ActivityFilmeBinding
+import com.iittii.task5.model.Results
+import com.iittii.task5.util.Constants.BASE_IMAGE
+import com.squareup.picasso.Picasso
 
-class rcadaptar(private val imageList: List<Int>) : RecyclerView.Adapter<rcadaptar.filmVH>() {
+class rcadaptar(private val movieList: Array<Results>, private val movieInterface: MovieInterface) : RecyclerView.Adapter<rcadaptar.filmVH>() {
 
     inner class filmVH(itemview: ActivityFilmeBinding) : RecyclerView.ViewHolder(itemview.root) {
         var ivfilme: ImageView? = null
@@ -25,11 +26,16 @@ class rcadaptar(private val imageList: List<Int>) : RecyclerView.Adapter<rcadapt
     }
 
     override fun onBindViewHolder(holder: filmVH, position: Int) {
-        holder.ivfilme?.setImageResource(imageList[position])
+        holder.ivfilme?.let {
+            Picasso.get().load(BASE_IMAGE + movieList[position].poster_path).into(it)
+            it.setOnClickListener {
+                movieInterface.onClick(movieList[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return imageList.size
+        return movieList.size
     }
 
 

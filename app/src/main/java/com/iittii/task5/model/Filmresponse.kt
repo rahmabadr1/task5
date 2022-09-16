@@ -6,19 +6,19 @@ import kotlin.Number
 import kotlin.String
 
 data class Filmresponse(
-    val page: Number,
+    val page: Int,
     val results: Array<Results>,
-    val total_pages: Number,
-    val total_results: Number
+    val total_pages: Int,
+    val total_results: Int
 )
 
 data class Results(
 
     val backdrop_path: String,
-    val id: Number,
+    val id: Int,
     val overview: String,
     val poster_path: String,
-    val vote_average: Number,
+    val vote_average: Double,
     val title: String,
 
 
